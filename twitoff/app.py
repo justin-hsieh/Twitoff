@@ -28,7 +28,7 @@ def create_app():
     @app.route('/user/<name>', methods=['GET'])
     def user(name=None, message = ''):
         #message = ''
-        name = name or request.values['username']
+        name = name or request.values['user_name'] 
         try:
             if request.method == 'POST':
                 add_or_update_user(name)
