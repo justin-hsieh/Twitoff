@@ -5,7 +5,7 @@ DB = SQLAlchemy()
 class User(DB.Model):
     #Twitter users that we analyze
     id = DB.Column(DB.BigInteger, primary_key = True)
-    name = DB.Column(DB.String(15), unique=True, nullable = False)
+    name = DB.Column(DB.String(15), nullable = False)
     newest_tweet_id = DB.Column(DB.BigInteger)
 
     def __repr__(self):
