@@ -21,8 +21,6 @@ def create_app():
     #create the route
     @app.route('/')
     def root():
-        DB.drop_all()
-        DB.create_all()
         users = User.query.all()
         return render_template('base.html', title = 'Home', users=users)
     
