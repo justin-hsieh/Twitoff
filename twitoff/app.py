@@ -53,7 +53,7 @@ def create_app():
             else:
                 message = f'"{tweet_text}" is more likely to be said by {user2} than {user1}, with {100-confidence}% confidence'
         return render_template('prediction.html', title='Prediction', message=message)
-    @app.route('/reset ')
+    @app.route('/reset')
     def reset():
         DB.drop_all()
         DB.create_all()
