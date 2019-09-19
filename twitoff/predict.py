@@ -3,8 +3,9 @@ from sklearn.linear_model import LogisticRegression
 from .models import User
 from .twitter import BASILICA
 
-"""Predictions of user tweets based on Tweet embeddings. Determine who 
+"""Predictions of user tweets based on Tweet embeddings. Determine who
    is more likely to write a given tweet"""
+
 
 def predict_user(user1_name, user2_name, tweet_text, cache=None):
     user1 = User.query.filter(User.name == user1_name).one()
@@ -18,4 +19,4 @@ def predict_user(user1_name, user2_name, tweet_text, cache=None):
     log_reg = LogisticRegression(solver='lbfgs', max_iter=1000)
     log_reg.fit(embeddings, labels)
     tweet_embedding = BASILICA.embed_sentence(tweet_text, model='twitter')
-    return log_reg.predict_proba(np.array([tweet_embedding]))[:,1]
+    return log_reg.predict_proba(np.array([tweet_embedding]))[:, 1]

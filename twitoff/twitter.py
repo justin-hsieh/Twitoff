@@ -13,6 +13,7 @@ TWITTER = tweepy.API(TWITTER_AUTH)
 
 BASILICA = basilica.Connection(config('BASILICA_KEY'))
 
+
 def add_or_update_user(username):
     # add or update a user *and* their tweets, error if no/private user
     try:
@@ -20,7 +21,8 @@ def add_or_update_user(username):
 
         # Create SQLAlchemy User db instance
         db_user = (
-            User.query.get(twitter_user.id) or User(id=twitter_user.id, name=username))
+            User.query.get(
+                twitter_user.id) or User(id=twitter_user.id, name=username))
 
         # Add user to database
         DB.session.add(db_user)
@@ -51,6 +53,7 @@ def add_or_update_user(username):
         # If no exceptions, commit the records
         DB.session.commit()
 
+
 def add_users(users):
     """
     Add/update a list of users (strings of user names).
@@ -58,6 +61,7 @@ def add_users(users):
     """
     for user in users:
         add_or_update_user(user)
+
 
 def update_all_users():
     """Update all Tweets for all Users in the User table."""
