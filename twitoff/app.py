@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 from .models import DB, User
 from .predict import predict_user
 from .twitter import add_or_update_user, update_all_users
-from os import getenv
+#from os import getenv
 #from dotenv import load_dotenv
 #load_dotenv()
 
@@ -39,18 +39,6 @@ def create_app():
             tweets = []
         return render_template('user.html', title=name, tweets=tweets,
                                 message=message)
-        
-    @app.route('/update')
-    def update():
-        update_all_users()
-        return render_template('base.html', title='Update all users!', users=User.query.all())
-    
-    @app.route('/reset ')
-    def reset():
-        DB.drop_all()
-        DB.create_all()
-        return render_template('base.html', title='DB Reset!', users=[])
-    
     @app.route('/compare', methods=['POST'])
     def compare(message=''):
         user1, user2 = sorted([request.values['user1'],
@@ -65,5 +53,15 @@ def create_app():
             else:
                 message = f'"{tweet_text}" is more likely to be said by {user2} than {user1}, with {100-confidence}% confidence'
         return render_template('prediction.html', title='Prediction', message=message)
-    
+    @app.route('/reset ')
+    def reset():
+        DB.drop_all()
+        DB.create_all()
+        return render_template('base.html', title='DB Reset!', users=[])
+
+    @app.route('/update')
+    def update():
+        update_all_users()
+        return render_template('base.html', title='Update all users!', users=User.query.all())
+
     return app
