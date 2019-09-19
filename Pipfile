@@ -13,6 +13,7 @@ basilica = "*"
 scikit-learn = "*"
 gunicorn = "*"
 psycopg2 = "*"
+guniorn = "*"
 
 [requires]
 python_version = "3.7"
