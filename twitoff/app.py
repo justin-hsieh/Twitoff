@@ -4,17 +4,17 @@ from .models import DB, User
 from .predict import predict_user
 from .twitter import add_or_update_user, update_all_users
 from os import getenv
-from dotenv import load_dotenv
-load_dotenv()
+#from dotenv import load_dotenv
+#load_dotenv()
 
 # make own app factory
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URL')
+    app.config['SQLALCHEMY_DATABASE_URI'] = config('DATABASE_URL')
 
     #stop tracking modifications
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['ENV'] = config('ENV')
+    #app.config['ENV'] = config('ENV')
     #add in database init later
     DB.init_app(app)
 
