@@ -53,11 +53,9 @@ def create_app():
             tweet_text = request.values['tweet_text']
             confidence = int(predict_user(user1, user2, tweet_text) * 100)
             if confidence >= 50:
-                message = f'"{tweet_text}" is more likely to be said by /
-                {user1} than {user2}, with {confidence} % confidence'
+                message = f'"{tweet_text}" is more likely to be said by {user1} than {user2}, with {confidence} % confidence'
             else:
-                message = f'"{tweet_text}" is more likely to be said by /
-                {user2} than {user1}, with {100-confidence} % confidence'
+                message = f'"{tweet_text}" is more likely to be said by {user2} than {user1}, with {100-confidence} % confidence'
         return render_template(
             'prediction.html', title='Prediction', message=message)
 
